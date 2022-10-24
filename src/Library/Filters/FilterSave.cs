@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using CompAndDel;
-using TwitterUCU;
+
 namespace CompAndDel.Filters
 {
     public class FilterSave : IFilter

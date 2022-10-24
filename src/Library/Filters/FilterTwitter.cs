@@ -18,7 +18,7 @@ namespace CompAndDel.Filters
         {
             //string path2=Path;//@"x.jpg";
             var twitter = new TwitterImage();
-            Console.WriteLine(twitter.PublishToTwitter(this.Msg, image));
+            Console.WriteLine(twitter.PublishToTwitter(this.Msg, "FotoAsubir.jpg"));
             return image;            
         }
     }

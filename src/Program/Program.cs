@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CompAndDel.Pipes;
 using CompAndDel.Filters;
 using TwitterUCU;
@@ -30,10 +30,11 @@ namespace CompAndDel
         }
         static void ejercicio3();
         {
+            PictureProvider provider = new PictureProvider();
             IPicture picture = provider.GetPicture(@"luke.jpg");
             IPipe final = new PipeNull();
             IFilter gris = new FilterGreyscale();
-            IFilter tw1= new FilterTwitter();
+            IFilter tw1= new FilterTwitter("Luke esta Loco");
             IPipe serial2 = new PipeSerial(tw1,final);
             IPipe serial1 = new PipeSerial(gris,serial2);
         }
