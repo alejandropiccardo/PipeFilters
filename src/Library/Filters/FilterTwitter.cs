@@ -4,21 +4,21 @@ using CompAndDel;
 using TwitterUCU;
 namespace CompAndDel.Filters
 {
-    public class FilterSave : IFilter
+    public class FilterTwitter : IFilter
     {
         /// <summary>
         /// guarda la imagen en path
         /// </summary>
-        public FilterSave(string path)
+        public FilterTwitter(string msg)
         {
-            this.Path=path;   
+            this.Msg=msg;   
         }
-        public string Path { get; set; }
+        public string Msg { get; set; }
         public IPicture Filter(IPicture image)
         {
             //string path2=Path;//@"x.jpg";
-            PictureProvider providerinternal1 = new PictureProvider();
-            providerinternal1.SavePicture(image,this.Path);
+            var twitter = new TwitterImage();
+            Console.WriteLine(twitter.PublishToTwitter(this.Msg, image));
             return image;            
         }
     }

@@ -1,23 +1,24 @@
 ﻿using System;
 using CompAndDel.Pipes;
 using CompAndDel.Filters;
-
+using TwitterUCU;
 namespace CompAndDel
+
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //ejercicio1()
-            intentodeSave();
-           // ejercicio2();
+            //ejercicio1();
+            //intentodeSave();
+            ejercicio3();
         }
 
         static void ejercicio1()
         {
             //constructores
             PictureProvider provider = new PictureProvider();
-            IPicture picture = provider.GetPicture(@"beer.jpg");
+            IPicture picture = provider.GetPicture(@"luke.jpg");
             IPipe final = new PipeNull();//termina                              3
             IFilter negative1 = new FilterNegative();
             IPipe serial2 = new PipeSerial(negative1,final);//                  2
@@ -28,49 +29,16 @@ namespace CompAndDel
             provider.SavePicture(serial1.Send(picture), @"intento1.jpg");
 
         }
-        static void ejercicio2()
+        static void ejercicio3();
         {
-                IFilter neg = new FilterNegative();       
-                IFilter gris = new FilterGreyscale();
-                IFilter save2 = new FilterSave(@"lukeInt2.jpg");
-                IFilter save1 = new FilterSave(@"LukeInt1.jpg");
-            IPipe fin = new PipeNull();
-            IPipe serial3 = new PipeSerial(save1,fin);
-            IPipe serial2 = new PipeSerial(neg,serial3);
-            IPipe serial4 = new PipeSerial(save2,serial2);
-            IPipe serial1 = new PipeSerial(gris,serial4);// 1pipe EMPIEZOOO
-
-            //accion
-            PictureProvider provider = new PictureProvider();
             IPicture picture = provider.GetPicture(@"luke.jpg");
-            PictureProvider provider2 = new PictureProvider();
-            provider2.SavePicture(serial1.Send(picture), @"lukeFinal.jpg");
-            
+            IPipe final = new PipeNull();
+            IFilter gris = new FilterGreyscale();
+            IFilter tw1= new FilterTwitter();
+            IPipe serial2 = new PipeSerial(tw1,final);
+            IPipe serial1 = new PipeSerial(gris,serial2);
         }
-        static void intentodeSave()
-        {
-                IFilter neg = new FilterNegative();       
-                IFilter gris = new FilterGreyscale();
-               IFilter save2 = new FilterSave(@"x.jpg");
-            //    IFilter save1 = new FilterSave(@"LukeInt1");
-            IPipe fin = new PipeNull();
-           // IPipe serial3 = new PipeSerial(save1,fin);
-            //IPipe serial2 = new PipeSerial(neg,serial3);
-            IPipe serial4 = new PipeSerial(save2,fin);
-            IPipe serial1 = new PipeSerial(gris,serial4);
-
-
-
-            PictureProvider provider = new PictureProvider();
-            IPicture picture = provider.GetPicture(@"luke.jpg");
-
-            PictureProvider provider2 = new PictureProvider();
-            provider2.SavePicture(serial1.Send(picture), @"lukeSave.jpg");
-
-
-
-
-        }
+    
        
     }
 }
