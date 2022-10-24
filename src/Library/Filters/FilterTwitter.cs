@@ -9,16 +9,18 @@ namespace CompAndDel.Filters
         /// <summary>
         /// guarda la imagen en path
         /// </summary>
-        public FilterTwitter(string msg)
+        public FilterTwitter(string msg,string path)
         {
+            this.Path=path;
             this.Msg=msg;   
         }
         public string Msg { get; set; }
+        public string Path {get; set; }
         public IPicture Filter(IPicture image)
         {
             //string path2=Path;//@"x.jpg";
             var twitter = new TwitterImage();
-            Console.WriteLine(twitter.PublishToTwitter(this.Msg, "FotoAsubir.jpg"));
+            Console.WriteLine(twitter.PublishToTwitter(this.Msg, this.Path));
             return image;            
         }
     }
