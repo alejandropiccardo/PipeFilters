@@ -9,7 +9,8 @@ namespace CompAndDel
         static void Main(string[] args)
         {
             //ejercicio1()
-            ejercicio2();
+            intentodeSave();
+           // ejercicio2();
         }
 
         static void ejercicio1()
@@ -31,8 +32,8 @@ namespace CompAndDel
         {
                 IFilter neg = new FilterNegative();       
                 IFilter gris = new FilterGreyscale();
-                IFilter save2 = new FilterSave(@"lukeInt2");
-                IFilter save1 = new FilterSave(@"LukeInt1");
+                IFilter save2 = new FilterSave(@"lukeInt2.jpg");
+                IFilter save1 = new FilterSave(@"LukeInt1.jpg");
             IPipe fin = new PipeNull();
             IPipe serial3 = new PipeSerial(save1,fin);
             IPipe serial2 = new PipeSerial(neg,serial3);
@@ -42,7 +43,33 @@ namespace CompAndDel
             //accion
             PictureProvider provider = new PictureProvider();
             IPicture picture = provider.GetPicture(@"luke.jpg");
-            serial1.Send(picture);
+            PictureProvider provider2 = new PictureProvider();
+            provider2.SavePicture(serial1.Send(picture), @"lukeFinal.jpg");
+            
+        }
+        static void intentodeSave()
+        {
+                IFilter neg = new FilterNegative();       
+                IFilter gris = new FilterGreyscale();
+               IFilter save2 = new FilterSave(@"x.jpg");
+            //    IFilter save1 = new FilterSave(@"LukeInt1");
+            IPipe fin = new PipeNull();
+           // IPipe serial3 = new PipeSerial(save1,fin);
+            //IPipe serial2 = new PipeSerial(neg,serial3);
+            IPipe serial4 = new PipeSerial(save2,fin);
+            IPipe serial1 = new PipeSerial(gris,serial4);
+
+
+
+            PictureProvider provider = new PictureProvider();
+            IPicture picture = provider.GetPicture(@"luke.jpg");
+
+            PictureProvider provider2 = new PictureProvider();
+            provider2.SavePicture(serial1.Send(picture), @"lukeSave.jpg");
+
+
+
+
         }
        
     }

@@ -12,12 +12,11 @@ namespace CompAndDel.Filters
         /// <summary>
         /// guarda la imagen en path
         /// </summary>
-        private string Name;
         public FilterSave(string path)
         {
-            string Name=path;
-            
+            string Path=path;   
         }
+        public string Path { get; set; }
 
 
         /// Procesa la imagen pasada por parametro mediante un kernel, y retorna la imagen resultante.
@@ -26,8 +25,9 @@ namespace CompAndDel.Filters
         /// <returns>La imagen con el filtro aplicado.</returns>
         public IPicture Filter(IPicture image)
         {
-            PictureProvider provider = new PictureProvider();
-            provider.SavePicture(image, this.Name);
+            string path2=Path;//@"x.jpg";
+            PictureProvider providerinternal1 = new PictureProvider();
+            providerinternal1.SavePicture(image,path2);
             return image;
 
 
